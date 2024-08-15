@@ -19,50 +19,51 @@
     </p>
     {% endif %}
 
-    <div class="contact-links" style="margin-block: calc(var(--small-font-size) * 2);
-    display: flex;
-    align-items: center;
-    gap: 0 var(--spacing);"> 
+    {% if contact.owner == user %}
+        <div class="contact-links" style="margin-block: calc(var(--small-font-size) * 2);
+            display: flex;
+            align-items: center;
+            gap: 0 var(--spacing);"> 
 
-        <a class="btn btn-link" href="{% url 'contact:update' contact.id %}"
-        style="font-size: var(--small-font-size);
-        text-decoration: none;
-        font-weight: bold;
-        padding: 1rem;
-        display: block;
-        line-height: var(--small-font-size);">
-            Update
-        </a>
+            <a class="btn btn-link" href="{% url 'contact:update' contact.id %}"
+            style="font-size: var(--small-font-size);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 1rem;
+            display: block;
+            line-height: var(--small-font-size);">
+                Update
+            </a>
 
-        <form action="{% url 'contact:delete' contact.id %}" method="POST">
-            {% csrf_token %}
-
-            {% if confirmation == 'no' %}
-                <input type="hidden" name="confirmation" value="yes">
-                <button class="btn btn-link btn-delete" type="submit"
-                style="font-size: var(--small-font-size);
-                text-decoration: none;
-                font-weight: bold;
-                padding: 1rem;
-                display: block;
-                line-height: var(--small-font-size);
-                background-color: tomato;">
-                    Confirm?
-                </button>
-            {% else %}
-                <button class="btn btn-link btn-delete" type="submit"
-                style="font-size: var(--small-font-size);
-                text-decoration: none;
-                font-weight: bold;
-                padding: 1rem;
-                display: block;
-                line-height: var(--small-font-size);
-                background-color: tomato;">
-                    Delete
-                </button>
-            {% endif %}
-        </form>
-    </div>
+            <form action="{% url 'contact:delete' contact.id %}" method="POST">
+                {% csrf_token %}
+                {% if confirmation == 'no' %}
+                    <input type="hidden" name="confirmation" value="yes">
+                    <button class="btn btn-link btn-delete" type="submit"
+                    style="font-size: var(--small-font-size);
+                    text-decoration: none;
+                    font-weight: bold;
+                    padding: 1rem;
+                    display: block;
+                    line-height: var(--small-font-size);
+                    background-color: tomato;">
+                        Confirm?
+                    </button>
+                {% else %}
+                    <button class="btn btn-link btn-delete" type="submit"
+                    style="font-size: var(--small-font-size);
+                    text-decoration: none;
+                    font-weight: bold;
+                    padding: 1rem;
+                    display: block;
+                    line-height: var(--small-font-size);
+                    background-color: tomato;">
+                        Delete
+                    </button>
+                {% endif %}
+            </form>
+        </div>
+    {% endif %}
 </div>
 
 {% endblock content%}

@@ -1,0 +1,15 @@
+{% extends 'global/base.html' %}
+
+{% block content %}
+<div class="form-wrapper">
+    <h2>Login</h2>    
+    {% if user.is_authenticated %}
+        <p>
+            You Are Logged in as: {{ user.username }}<br>
+            Click <a href="{% url 'contact:logout' %}">Here</a> For Logout
+        </p>
+    {% else %}
+        {% include 'contact/partials/_user_form.html'%}
+    {% endif %}
+</div>
+{% endblock content %}
